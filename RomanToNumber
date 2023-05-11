@@ -1,0 +1,54 @@
+import java.util.*;
+
+public class RomanToNumber {
+	int romantToInt(char r)
+	{
+		if (r == 'I')
+			return 1;
+		if (r == 'V')
+			return 5;
+		if (r == 'X')
+			return 10;
+		if (r == 'L')
+			return 50;
+		if (r == 'C')
+			return 100;
+		if (r == 'D')
+			return 500;
+		if (r == 'M')
+			return 1000;
+		return -1;
+	}
+
+	int convertRomanToInteger(String inputRomanNumber)
+	{
+		int result = 0;
+		for (int i = 0; i < inputRomanNumber.length(); i++)
+		{
+			int romanDigitOne = romantToInt(inputRomanNumber.charAt(i));
+			if (i + 1 < inputRomanNumber.length()) {
+				int romanDigitTwo = romantToInt(inputRomanNumber.charAt(i + 1));
+				if (romanDigitOne >= romanDigitTwo) {
+					result = result + romanDigitOne;
+				}
+				else {
+				
+					result = result + romanDigitTwo -romanDigitOne;
+					i++;
+				}
+			}
+			else {
+				result = result + romanDigitOne;
+			}
+		}
+		return result;
+	}
+
+	public static void main(String args[])
+	{
+		RomanToNumber ob = new RomanToNumber();
+		String str = "XCIV";
+		System.out.println(str+" => "
+						+ ob.convertRomanToInteger(str));
+	}
+}
